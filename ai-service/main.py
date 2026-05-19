@@ -5,7 +5,7 @@ from fastapi import FastAPI
 from contextlib import asynccontextmanager
 
 from app.core.config import model_registry
-from app.routers import whatif, classify  # Import router baru kita
+from app.routers import whatif, classify, forecast  # Import router baru kita
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
@@ -41,6 +41,14 @@ async def lifespan(app: FastAPI):
         with open(wi_json, "r") as f:
             model_registry.whatif_metadata = json.load(f)
         print("[READY] Model 3 (What-If Lab) berhasil dimuat!")
+
+       # --- LOAD MODEL 2 ---
+        fc_keras = os.path.join(BASE_DIR, "models", "forecast", "model_forecast.keras")
+        fc_json = os.path.join(BASE_DIR, "models", "forecast", "metadata.json")
+        model_registry.forecast_model = tf.keras.models.load_model(fc_keras, compile=False)
+        with open(fc_json, "r") as f:
+            model_registry.forecast_metadata = json.load(f)
+        print("[READY] Model 2 (Forecasting Engine) Berhasil Dimuat.")
         
     except Exception as e:
         print(f"[CRITICAL ERROR] Gagal memuat model biner AI: {e}")
@@ -52,7 +60,8 @@ app = FastAPI(title="FinTime Dedicated AI Engine", lifespan=lifespan)
 
 # Daftarkan Router
 app.include_router(whatif.router)
-app.include_router(classify.router) # Daftarkan router NLP
+app.include_router(classify.router)
+app.include_router(forecast.router)
 
 @app.get("/health")
 def health():
