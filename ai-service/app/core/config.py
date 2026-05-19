@@ -8,9 +8,10 @@ class AIModelRegistry:
         # Model 1: NLP Classification
         self.classify_model = None
         self.classify_metadata = None
-        self.classify_tokenizer = None
         
+        # Model 2: Forecasting 
         self.forecast_model = None
+        self.forecast_metadata = None
 
 # Single instance untuk digunakan di seluruh aplikasi
 model_registry = AIModelRegistry()
