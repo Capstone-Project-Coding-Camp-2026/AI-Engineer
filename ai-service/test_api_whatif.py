@@ -39,15 +39,15 @@ def run_test():
         response = client.post("/predict/whatif", json=payload)
         
         print("\n=======================================================")
-        print("🔴 DEBUG OUTPUT JSON RESMI DARI FASTAPI (.keras):")
+        print("DEBUG OUTPUT JSON RESMI DARI FASTAPI (.keras):")
         print("=======================================================")
         
         if response.status_code == 200:
             print(json.dumps(response.json(), indent=2))
             print("=======================================================")
-            print("✅ STATUS: PASS (200 OK)")
+            print("STATUS: PASS (200 OK)")
         else:
-            print(f"❌ ERROR {response.status_code}: {response.text}")
+            print(f"ERROR {response.status_code}: {response.text}")
             print("=======================================================")
 
 if __name__ == "__main__":
