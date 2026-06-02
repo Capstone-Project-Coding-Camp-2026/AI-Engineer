@@ -1,6 +1,6 @@
-================================================================================
+
 📖 FINTIME MACHINE LEARNING MODELS - README
-================================================================================
+
 
 Repositori ini memuat pipeline pemodelan Machine Learning untuk aplikasi FinTime. 
 Terdapat tiga model utama yang dibangun menggunakan TensorFlow/Keras, di mana 
